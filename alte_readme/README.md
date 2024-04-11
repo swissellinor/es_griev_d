@@ -1,23 +1,22 @@
 ## Statistical classifier that uses logistic-regression to classify grievances based on feature-based rules.
 
-Pipeline that helps annotate features that are present in grievance frames in latin-american elite discourse (manifestos). In the next step the feature-counts for each item are transformed into vectors and given into a logistic regression model (grievance binominal and vector 7-dimensional). 
+Pipeline that helps annotate features that are present in grievance frames in latin-american elite discourse (manifestos). In the next step the feature-counts for each item are transformed into vectors and given into a logistic regression model. 
 
 
 ### FEATURES
 
 Based on a qualitative analysis of the corpus, the multiple features were found as indicators of grievance frames and seven of them turned out to be significant: 
 
-image-3.png
 
 **sentiment**
 - sentiment calculated with STANZA 0 - negative, 1- neutral, 2 - positive
 - Grievances are significantly more negative. Therefore, the higher the sentiment, the more probable it is a non-grievance
 
-**deprived_group** (Tag: +GROUP): 
+**deprived_group** (Tag: +GRUPO): 
 - wordlist here: https://github.com/swissellinor/thesis/blob/main/esgrievd/wordlists/deprived_group.jsondeprived_group.json
 - the higher the count of deprived_group, the more probable the item is a grievance
 
-**Problem framing:** (Tag: +PROBLEM): 
+**Problem framing:** (Tag: +PROBLEMA): 
 - wordlist here: https://github.com/swissellinor/thesis/blob/main/esgrievd/wordlists/problem_frame.json
 - the higher the count of problem_frames, the more probable it is a grievance
 
@@ -27,7 +26,7 @@ image-3.png
 - the higher the count of CTAs, the less probable it is a grievance. This could be due to an erroneous rule.
 
 
-|Discourse relational features | adversative conjunctions (Tag: +ADVERSATIVE)| causal (Tag: +CAUSAL)| consecutive (Tag: +CONSECUTIVE) |
+|Discourse relational features (Tag: +DISCURSO) | adversative conjunctions | causal | consecutive |
 | ----- | ---- | ----- | ---- |
 | | pero| porque | |
 | | aunque | pues | indudablamende |
@@ -47,7 +46,7 @@ image-3.png
 - Discourse relational features can be found in the wordlists too. 
 - The higher the count of features, the more probable it is a grievance
 
-| sentence modifier | negation (Tag: +NEGATION) | restriction (Tag: +RESTRICTION) | intensifier (Tag: +INTENSIFIER) |
+| sentence modifier (Tag: +MODIFICADOR) | negation | restriction | intensifier |
 |----- | ---- | ----|---|
 | | no | casi sin| muy |
 | | sin (prep) | menor | demasiado |
