@@ -66,7 +66,3 @@ Based on a qualitative analysis of the corpus, the multiple features were found 
 | Third person (Tag: +3) |  él, ella, usted, lo, la, le, suyo, suya, se | ellos, ellas, ustedes, los, las, les, suyos, suyas, se |
 - For pronouns, only the first person singular turned out to be significant. 
 - The higher the count of 1P SG, the less probable it is a grievance.
-
-main.ipynb: Read in the dataset, work with STANZA, tagg the important features
-
-corpus_analysis.ipynb: Do some wordclouds and table with frequent stuff, count the tags and normalize them, get the weight for the significant features. In preparation for the classifier, create an "input table" with the important counts.

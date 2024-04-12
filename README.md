@@ -13,10 +13,51 @@ This is a pipeline to classify grievances using different models
 2. compression approach (npc-gzip, adapted from https://github.com/bazingagin/npc_gzip)
 3. spanish pre-trained RoBERTa (https://github.com/chriskhanhtran/spanish-bert)
 
+### FEATURES
 
-## Setup
-- see requirements.txt
+Based on a qualitative analysis of the corpus, the multiple features were found as indicators of grievance frames and five of them turned out to be significant: 
 
+
+**sentiment**
+- sentiment calculated with STANZA 0 - negative, 1- neutral, 2 - positive
+- Grievances are significantly more negative. Therefore, the higher the sentiment, the more probable it is a non-grievance
+
+**deprived_group** (Tag: +GRUPO): 
+- wordlist here: https://github.com/swissellinor/es_griev_d/blob/main/wordlists/deprived_group.json
+- the higher the count of deprived_group, the more probable the item is a grievance
+
+**Problem framing:** (Tag: +PROBLEMA): 
+- wordlist here: https://github.com/swissellinor/es_griev_d/blob/main/wordlists/problem_frame.json
+- the higher the count of problem_frames, the more probable it is a grievance
+
+
+| sentence modifier (Tag: +MODIFICADOR) | negation | restriction | intensifier |
+|----- | ---- | ----|---|
+| | no | casi sin| muy |
+| | sin (prep) | menor | demasiado |
+| | nunca | minoria | realmente |
+| | jamas | solo | bastante |
+| | faltar (V) | restringir (V) | mas |
+| | excluyir (V) | limitar (V) | menos |
+| | ausencia de | poco| tan |
+| |tampoco| unicamente | mucho|
+| |ni siquiera| | super|
+- The higher the count of modifier, the more probable it is a grievance
+
+| Pronouns, Possessives, Reflexives | Singular (Tag: +SG) | Plural (Tag +PL) |
+|----------| ------------------- | ---------------- |
+| First person (Tag: +1) | yo, mí, me, mío, mía, míos, mías | nosotros, nosotras, nuestro, nuestras, nos |
+| Second person (Tag: +2) | tú, te, tí, tuyo, tuya, tuyos, tuyas, se | ustedes, os, los, las, vuestro, vuestra, vuestros, vuestras, se |
+| Third person (Tag: +3) |  él, ella, usted, lo, la, le, suyo, suya, se | ellos, ellas, ustedes, los, las, les, suyos, suyas, se |
+- For pronouns, only the first person singular turned out to be significant. 
+- The higher the count of 1P SG, the less probable it is a grievance.
+
+
+**Call to Actions** (Tag: +CTA)
+- deber + verb
+- hay que + verb
+- imperative verb forms
+- the higher the count of CTAs, the less probable it is a grievance. This could be due to an erroneous rule.
 
 ## LOG changes
 - tried using another RoBERTa model for comparison
