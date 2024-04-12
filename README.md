@@ -13,6 +13,53 @@ This is a pipeline to classify grievances using different models
 2. compression approach (npc-gzip, adapted from https://github.com/bazingagin/npc_gzip)
 3. spanish pre-trained RoBERTa (https://github.com/chriskhanhtran/spanish-bert)
 
+
+### ARGUMENTS: 
+
+Folders and Data:
+--input: The folder containing the input data. Default is input.
+--corpus: The name of the corpus file. Default is corpus.xlsx.
+--wordlists: The folder containing the wordlists. Default is wordlists.
+--data: The folder containing the pickled or intermediate data. Default is data.
+--output: The folder to store the output in. Default is OUTPUT-{TIME}-{TOKEN}.
+Preprocessing:
+--tokenize: A boolean value indicating whether to tokenize the text. Default is True. Otherwise skip tokenization and use existing data.
+--features: A string/boolean value indicating whether to tag the text. Default is all. Allowed values are "true", "false", "none", "all", "null", and "" or one or more features separated by commas.
+--tag_mode: The sentiment mode to use. Default is upper. Allowed values are "upper": +NEGATIVE, "lower": +negative, and "value": +0.1352376.
+Performance:
+--threads: The number of threads to use for parallel processing. Default is 8.
+Classification approach:
+--resample: A boolean value indicating whether to resample the data. Default is False.
+--random_state: The random state to use for all occasions. Default is 42.
+--kfold: A boolean value indicating whether to use stratified k-fold cross-validation. Default is True. Otherwise, use a simple train-test split.
+--logreg: A boolean value indicating whether to use logistic regression. Default is False.
+--gzip: A boolean value indicating whether to use gzip. Default is False.
+--bert: A boolean value indicating whether to use BERT. Default is False.
+--hybrid: A boolean value indicating whether to use a hybrid mode. Default is False. The hybrid approach tags the rule-based features in the text and uses either gzip or BERT for classification.
+Stratified k-fold cross-validation parameters:
+--folds: The number of folds. Default is 5.
+Splitting parameters (for simple train-test splitting only!):
+--min_grievances: The minimum number of grievances to include in the training set. Default is 20. Has no effect if "resampling" is set to True.
+--train_size: A number between 0 and 1 that indicates the size of the training set. Default is 0.7.
+Logistic regression parameters:
+--iterations: The maximum number of iterations to use for training the logistic regression model. Default is 100.
+--vector_dense: A boolean defining if the vector for logreg should be dense (True) or sparse (False). Default is True.
+--scaler: A boolean defining if the vectorized data should be scaled. Default is True. Hint: Scaling is crucial for calculating the feature importance!
+GZIP parameters:
+--k: The number of nearest neighbors to use for classification. Default is 3.
+BERT parameters:
+--batch_size: The batch size to use for training and evaluation. Default is 8.
+--epoch: The number of epochs to use for training. Default is 3.
+--lr: The learning rate to use for training. Default is 1e-5.
+--print_model: A boolean value indicating whether to print the model. Default is False.
+Statistics:
+--count_features: A boolean value indicating whether to count the tags in the tagged dataframe. Default is True.
+--feature_normal: A boolean value indicating whether to normalize the features. Default is False.
+Save Modes:
+--save_dataframe: A boolean value indicating whether to save the dataframe. Default is True.
+--save_results: A boolean value indicating whether to save the results. Default is True.
+--save_callbacks: A boolean value indicating whether to save the callbacks. Default is True.
+
 ### FEATURES
 
 Based on a qualitative analysis of the corpus, the multiple features were found as indicators of grievance frames and five of them turned out to be significant: 
