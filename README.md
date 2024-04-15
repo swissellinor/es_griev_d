@@ -1,4 +1,4 @@
-# Masters Thesis: Automatically Identifying/ Classifying Grievance Frames in Latin-American Elite Discourse
+# Masters Thesis: Automatically Detecting Grievance Frames in Spanish Elite Discourse
 
 This repository was created for my master's project. Three models are evaluated on a latin-american grievances-corpus. 
 
